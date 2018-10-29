@@ -29,17 +29,12 @@ void Deck::populateDeck()
 	}
 }
 
-//might delete just need to see deck for debugging purposes
 void Deck::showDeck()
 {
 	std::list <Card> ::iterator it;
 	for (it = dDeck->begin(); it != dDeck->end(); ++it) {
 		it->showCard();
-	}
-	/*while (!aDeck->empty()) {
-		std::cout << &aDeck->showCard();
-		aDeck->pop();
-	}*/
+	} // shows discard pile
 }
 
 void Deck::shuffleDeck()
@@ -61,13 +56,21 @@ void Deck::stackDeck()
 	for (int i = 0; i < DECK_SIZE; i++) {
 		dDeck->push_back(aDeck->top());
 		aDeck->pop();
-	}*/
+	}*/ //writes stack back to list
 }
 
-void Deck::drawDeck(int n)
+void Deck::startDiscard()
 {
-	for (int i = 0; i < n; i++) {
-		aDeck->top();
-		aDeck->pop();
-	}
+	dDeck->push_back(aDeck->top());
+	aDeck->pop();
+}
+
+Card Deck::drawDeck()
+{
+	return aDeck->top();
+}
+
+void Deck::discard()
+{
+	aDeck->pop();
 }

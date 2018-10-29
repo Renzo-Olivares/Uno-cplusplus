@@ -11,7 +11,7 @@ public:
 	Card(int n)
 	{ number = n; }
 	~Card()
-	{ std::cout << "this is the card deconstructor" << std::endl; };
+	{ };
 	void showCard();
 	enum RANK { RED, GREEN, BLUE, YELLOW, WILD = 8 };
 	RANK rColor;

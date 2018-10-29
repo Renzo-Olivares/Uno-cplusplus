@@ -34,3 +34,20 @@ bool Player::getCpu()
 {
 	return isCpu;
 }
+
+void Player::setCard(Card n)
+{
+	hand->push_back(n);
+}
+
+void Player::showHand()
+{
+	if (isCpu)
+		std::cout << "hand is hidden" << std::endl;
+	else {
+		std::deque <Card> ::iterator it;
+		for (it = hand->begin(); it != hand->end(); ++it) {
+			it->showCard();
+		}
+	}
+}

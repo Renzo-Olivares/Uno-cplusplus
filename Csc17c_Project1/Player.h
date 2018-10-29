@@ -17,4 +17,6 @@ public:
 	void setCpu();
 	std::string getName();
 	bool getCpu();
+	void setCard(Card n);
+	void showHand();
 };
