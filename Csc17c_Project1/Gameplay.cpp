@@ -152,7 +152,9 @@ void Gameplay::drawTurn()
 		if (it->getTurn()) {
 			deal(1);
 			std::cout << "\nYou drew" << std::endl;
-			it->showDraw(); //come back to this and fix to just show the draw card not whole hand
+			dealHand->push_back(it->getTop()); //come back to this and fix to just show the draw card not whole hand
+			dealHand->back().showCard();
+			dealHand->pop_back();
 			std::cout << "\nWould you like to keep this card or play it? (1 or 2): ";
 			std::cin >> choice;
 			if (choice == 2) {
@@ -176,7 +178,7 @@ void Gameplay::drawTurn()
 
 void Gameplay::setValid(int a, int b, std::string c, std::string d)
 {
-	if (a == b || c == d) {
+	if (a == b | c == d) {
 		isValid = 1;
 	}
 	else
