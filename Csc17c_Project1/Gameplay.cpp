@@ -21,7 +21,12 @@ void Gameplay::initialize()
 			if (it->getTurn()) {
 				std::cout << "\nIt is Player " << it->getName() << "'s turn" << std::endl;
 				std::cout << "Would you like to draw or play a card (1 or 2): ";
-				std::cin >> choice;
+				if (!(it->getCpu())) {
+					std::cin >> choice;
+				}
+				else {
+					choice = ((rand() % 2) + 1); // (rand() % (# of integers in your range)) + (lowest number in range)
+				}
 				if (choice == 1) {
 					drawTurn();
 					if (!getValid()) {
@@ -36,7 +41,12 @@ void Gameplay::initialize()
 					playTurn();
 					while (!getValid()) {
 						std::cout << "\nWould you like to try again or draw a card? (1 or 2): ";
-						std::cin >> choice;
+						if (!(it->getCpu())) {
+							std::cin >> choice;
+						}
+						else {
+							choice = ((rand() % 2) + 1); // (rand() % (# of integers in your range)) + (lowest number in range)
+						}
 						if (choice == 1)
 							playTurn();
 						else {
@@ -52,7 +62,6 @@ void Gameplay::initialize()
 			//break out of this iteration loop 
 			if (it->getEmpty())
 			{
-				std::cout << "The winner is " << it->getName() << std::endl;
 				break;
 			}
 		}
@@ -128,7 +137,12 @@ void Gameplay::playTurn()
 		if (it->getTurn()) {
 			it->showHand();
 			std::cout << "\nWhat card do you want to play? (enter value of index of the card): ";
-			std::cin >> index;
+			if (!(it->getCpu())) {
+				std::cin >> index;
+			}
+			else {
+				index = ((rand() % it->handSize()) + 0); // (rand() % (# of integers in your range)) + (lowest number in range)
+			}
 			test = it->showColor(index);
 			test2 = testDeck->showCol();
 			num1 = it->showNum(index);
@@ -154,7 +168,13 @@ void Gameplay::drawTurn()
 			std::cout << "\nYou drew" << std::endl;
 			it->showDraw(); //come back to this and fix to just show the draw card not whole hand
 			std::cout << "\nWould you like to keep this card or play it? (1 or 2): ";
-			std::cin >> choice;
+			if (!(it->getCpu())) {
+				std::cin >> choice;
+			}
+			else {
+				choice = ((rand() % 2) + 1); // (rand() % (# of integers in your range)) + (lowest number in range)
+				std::cout << std::endl;
+			}
 			if (choice == 2) {
 				test = it->showColor();
 				test2 = testDeck->showCol();
@@ -176,7 +196,7 @@ void Gameplay::drawTurn()
 
 void Gameplay::setValid(int a, int b, std::string c, std::string d)
 {
-	if (a == b | c == d) {
+	if (a == b | c == d | c == "Wild" | d == "Wild") {
 		isValid = 1;
 	}
 	else

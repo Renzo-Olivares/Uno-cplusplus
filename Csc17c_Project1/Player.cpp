@@ -55,13 +55,17 @@ void Player::showHand()
 
 void Player::showDraw()
 {
-	std::deque <Card> ::iterator it;
-	for (it = hand->begin(); it != hand->end(); ++it) {
-		it->showCard();
-	}//remember to fix
-	//pass hand to a stack
-	//push top card to new dequeu
-	//iterate over that deque showing only draw card
+	if (isCpu)
+		std::cout << "Hand is hidden" << std::endl;
+	else {
+		std::deque <Card> ::iterator it;
+		for (it = hand->begin(); it != hand->end(); ++it) {
+			it->showCard();
+		}//remember to fix
+		//pass hand to a stack
+		//push top card to new dequeu
+		//iterate over that deque showing only draw card
+	}
 }
 
 void Player::disHand()
@@ -122,3 +126,7 @@ bool Player::getEmpty()
 	return hand->empty();
 }
 
+int Player::handSize()
+{
+	return hand->size();
+}

@@ -38,4 +38,5 @@ public:
 	std::string showColor();
 	int showNum(int);
 	int showNum();
+	int handSize();
 };

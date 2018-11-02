@@ -1,5 +1,6 @@
 #pragma once
 #include "Player.h"
+#include <ctime>
 
 class Gameplay
 {
@@ -18,6 +19,7 @@ private:
 public:
 	Gameplay()
 	{
+		srand(static_cast<unsigned int>(time(0)));
 		setPlayers();
 		for (int i = 0; i < nPlayers; i++) {
 			Player* ptr = nullptr;
