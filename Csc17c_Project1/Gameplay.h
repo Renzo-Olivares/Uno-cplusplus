@@ -7,7 +7,6 @@ private:
 	std::deque <Player> *playerCont = new std::deque <Player>;
 	std::list <Card> *dealHand = new std::list <Card>;
 	Deck* testDeck = new Deck;
-	int score;
 	int nPlayers;
 	std::string test = "";
 	std::string test2 = "";
@@ -33,14 +32,12 @@ public:
 	void initialize();
 	void deal();
 	void deal(int);
-	void setScore();
 	void setPlayers();
 	void setTurn();
 	void playTurn();
 	void drawTurn();
 	void setValid(int, int, std::string, std::string);
 	bool getValid();
-	int getScore();
 	int getPlayers();
 };
 

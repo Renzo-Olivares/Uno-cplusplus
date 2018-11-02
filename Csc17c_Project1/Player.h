@@ -19,6 +19,7 @@ public:
 	std::string getName();
 	bool getCpu();
 	bool getTurn();
+	bool getEmpty();
 	void setTurn();
 	void setCard(Card);
 	void disHand();

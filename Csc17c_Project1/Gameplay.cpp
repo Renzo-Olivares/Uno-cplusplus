@@ -39,11 +39,21 @@ void Gameplay::initialize()
 						std::cin >> choice;
 						if (choice == 1)
 							playTurn();
-						else
+						else {
+							isValid = 1;
 							drawTurn();
+						}
 					}
 					setTurn();
 				}
+
+			}
+			//if any hand is empty
+			//break out of this iteration loop 
+			if (it->getEmpty())
+			{
+				std::cout << "The winner is " << it->getName() << std::endl;
+				break;
 			}
 		}
 	}
@@ -62,8 +72,6 @@ void Gameplay::deal()
 			it->setCard(dealHand->back());
 			dealHand->pop_back();
 		}
-		//it->showHand(); //take out
-		//std::cout << std::endl; //take out
 	}
 }
 
@@ -88,19 +96,9 @@ void Gameplay::deal(int n)
 	}
 }
 
-void Gameplay::setScore()
-{
-
-}
-
 void Gameplay::setPlayers()
 {
 	nPlayers = 2;
-}
-
-int Gameplay::getScore()
-{
-	return score;
 }
 
 int Gameplay::getPlayers()
@@ -170,10 +168,7 @@ void Gameplay::drawTurn()
 					testDeck->disAdd(dealHand->back()); //push card to discard pile
 					dealHand->pop_back(); //discard from dealer hand
 					testDeck->showDeck(); //show new discard card //comeback to this just show top of discard
-					//setTurn();
 				}
-				//else
-					//setTurn();
 			}
 		}
 	}

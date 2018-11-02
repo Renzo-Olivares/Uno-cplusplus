@@ -100,19 +100,11 @@ Card Player::playCard(int n)
 std::string Player::showColor(int n)
 {
 	return hand->at(n).getColor();
-	/*std::deque <Card> ::iterator it;
-	for (it = hand->begin(); it != hand->end(); ++it) {
-		return it->getColor();
-	}*/
 }
 
 std::string Player::showColor()
 {
 	return hand->back().getColor();
-	/*std::deque <Card> ::iterator it;
-	for (it = hand->begin(); it != hand->end(); ++it) {
-		return it->getColor();
-	}*/
 }
 
 int Player::showNum(int n)
@@ -123,4 +115,9 @@ int Player::showNum(int n)
 int Player::showNum()
 {
 	return hand->back().getNum();
+}
+
+bool Player::getEmpty()
+{
+	return hand->empty();
 }
