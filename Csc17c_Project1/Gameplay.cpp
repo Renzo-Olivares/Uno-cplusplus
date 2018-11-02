@@ -3,10 +3,7 @@
 
 void Gameplay::initialize()
 {
-	std::cout << "\nCurrent discard card" << std::endl;
 	testDeck->startDiscard();
-	testDeck->showDeck(); //show discard pile //come back to this only show top of pile
-	std::cout << std::endl;
 
 	//initially set turn for non cpu player
 	std::deque <Player> ::iterator it;
@@ -18,6 +15,9 @@ void Gameplay::initialize()
 	//Turn logic rip
 	for (;;) {
 		for (it = playerCont->begin(); it != playerCont->end(); ++it) {
+			std::cout << "\nCurrent discard card" << std::endl;
+			testDeck->showDeck(); //show discard pile //come back to this only show top of pile
+			std::cout << std::endl;
 			if (it->getTurn()) {
 				std::cout << "\nIt is Player " << it->getName() << "'s turn" << std::endl;
 				std::cout << "Would you like to draw or play a card (1 or 2): ";
@@ -26,13 +26,17 @@ void Gameplay::initialize()
 					drawTurn();
 					if (!getValid()) {
 						std::cout << "\nThe card you drew cannot be played...end turn" << std::endl;
+						setTurn();
 					}
-					setTurn();
+					if (it->getTurn()) {
+						setTurn();
+					}
 				}
 				else {
 					playTurn();
-					if (!getValid()) {
-						std::cout << "\nWould you like to try again or draw a card? (1 or 2): " << std::endl;
+					while (!getValid()) {
+						std::cout << "\nWould you like to try again or draw a card? (1 or 2): ";
+						std::cin >> choice;
 						if (choice == 1)
 							playTurn();
 						else
@@ -91,8 +95,7 @@ void Gameplay::setScore()
 
 void Gameplay::setPlayers()
 {
-	std::cout << "\nHow many players did you wish to play with today? ";
-	std::cin >> nPlayers;
+	nPlayers = 2;
 }
 
 int Gameplay::getScore()
@@ -161,13 +164,16 @@ void Gameplay::drawTurn()
 				num2 = testDeck->showNum();
 				setValid(num1, num2, test, test2);
 				if (getValid()) {
-					it->showHand();
+					//it->showHand();
 					dealHand->push_back(it->playCard()); //push last card aka card you drew into dealer hand
 					it->disHand(); //discard the card from hand
 					testDeck->disAdd(dealHand->back()); //push card to discard pile
 					dealHand->pop_back(); //discard from dealer hand
 					testDeck->showDeck(); //show new discard card //comeback to this just show top of discard
+					//setTurn();
 				}
+				//else
+					//setTurn();
 			}
 		}
 	}
@@ -180,6 +186,7 @@ void Gameplay::setValid(int a, int b, std::string c, std::string d)
 	}
 	else
 	{
+		isValid = 0;
 		std::cout << "\nThe card you choose is invalid, pick another card or draw" << std::endl;
 	}
 }
