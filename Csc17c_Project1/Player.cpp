@@ -48,7 +48,7 @@ void Player::showHand()
 	else {
 		std::deque <Card> ::iterator it;
 		for (it = hand->begin(); it != hand->end(); ++it) {
-			//it->showCard();
+			it->showCard();
 		}
 	}
 }
@@ -56,8 +56,8 @@ void Player::showHand()
 void Player::showDraw()
 {
 	std::deque <Card> ::iterator it;
-	for (it = hand->end(); it <= hand->end(); ++it) {
-			it->showCard();
+	for (it = hand->begin(); it != hand->end(); ++it) {
+		it->showCard();
 	}//remember to fix
 	//pass hand to a stack
 	//push top card to new dequeu
@@ -95,4 +95,32 @@ Card Player::playCard()
 Card Player::playCard(int n)
 {
 	return hand->at(n);
+}
+
+std::string Player::showColor(int n)
+{
+	return hand->at(n).getColor();
+	/*std::deque <Card> ::iterator it;
+	for (it = hand->begin(); it != hand->end(); ++it) {
+		return it->getColor();
+	}*/
+}
+
+std::string Player::showColor()
+{
+	return hand->back().getColor();
+	/*std::deque <Card> ::iterator it;
+	for (it = hand->begin(); it != hand->end(); ++it) {
+		return it->getColor();
+	}*/
+}
+
+int Player::showNum(int n)
+{
+	return hand->at(n).getNum();
+}
+
+int Player::showNum()
+{
+	return hand->back().getNum();
 }

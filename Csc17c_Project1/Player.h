@@ -27,4 +27,8 @@ public:
 	void showDraw();
 	Card playCard();
 	Card playCard(int);
+	std::string showColor(int);
+	std::string showColor();
+	int showNum(int);
+	int showNum();
 };

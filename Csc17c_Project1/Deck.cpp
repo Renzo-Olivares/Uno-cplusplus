@@ -70,6 +70,16 @@ Card Deck::drawDeck()
 	return aDeck->top();
 }
 
+std::string Deck::showCol()
+{
+	return dDeck->back().getColor();
+}
+
+int Deck::showNum()
+{
+	return dDeck->back().getNum();
+}
+
 void Deck::discard()
 {
 	aDeck->pop();

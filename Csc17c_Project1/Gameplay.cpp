@@ -3,10 +3,6 @@
 
 void Gameplay::initialize()
 {
-	//bs
-	int choice = 0;
-	int index = 0;
-	//bs
 	std::cout << "\nCurrent discard card" << std::endl;
 	testDeck->startDiscard();
 	testDeck->showDeck(); //show discard pile //come back to this only show top of pile
@@ -19,7 +15,7 @@ void Gameplay::initialize()
 			it->setTurn();
 	}
 
-	//turn logic
+	//Turn logic rip
 	for (;;) {
 		for (it = playerCont->begin(); it != playerCont->end(); ++it) {
 			if (it->getTurn()) {
@@ -27,41 +23,22 @@ void Gameplay::initialize()
 				std::cout << "Would you like to draw or play a card (1 or 2): ";
 				std::cin >> choice;
 				if (choice == 1) {
-					deal(1);
-					std::cout << "\nYou drew" << std::endl;
-					it->showDraw(); //come back to this and fix to just show the draw card not whole hand
-					std::cout << "\nWould you like to keep this card or play it? (1 or 2): ";
-					std::cin >> choice;
-					if (choice == 2) {
-						it->showHand();
-						dealHand->push_back(it->playCard()); //push last card aka card you drew into dealer hand
-						it->disHand(); //discard the card from hand
-						testDeck->disAdd(dealHand->back()); //push card to discard pile
-						dealHand->pop_back(); //discard from dealer hand
-						testDeck->showDeck(); //show new discard card //comeback to this just show top of discard
+					drawTurn();
+					if (!getValid()) {
+						std::cout << "\nThe card you drew cannot be played...end turn" << std::endl;
 					}
-					it->setTurn();
-					if (it->getCpu())
-						--it;
-					else
-						++it;
-					it->setTurn();
+					setTurn();
 				}
 				else {
-					it->showHand();
-					std::cout << "\nWhat card do you want to play? (enter value of index of the card): ";
-					std::cin >> index;
-					dealHand->push_back(it->playCard(index)); // push the desired card into dealers hand
-					it->disHand(index); // discard card from hand
-					testDeck->disAdd(dealHand->back()); // push card to discard pile
-					dealHand->pop_back(); // discard card from dealer hand
-					testDeck->showDeck(); // show top of discard
-					it->setTurn();
-					if (it->getCpu())
-						--it;
-					else
-						++it;
-					it->setTurn();
+					playTurn();
+					if (!getValid()) {
+						std::cout << "\nWould you like to try again or draw a card? (1 or 2): " << std::endl;
+						if (choice == 1)
+							playTurn();
+						else
+							drawTurn();
+					}
+					setTurn();
 				}
 			}
 		}
@@ -118,11 +95,6 @@ void Gameplay::setPlayers()
 	std::cin >> nPlayers;
 }
 
-void Gameplay::setTurn()
-{
-	turn = 0;
-}
-
 int Gameplay::getScore()
 {
 	return score;
@@ -133,7 +105,86 @@ int Gameplay::getPlayers()
 	return nPlayers;
 }
 
-int Gameplay::getTurn()
+void Gameplay::setTurn()
 {
-	return turn;
+	std::deque <Player> ::iterator it;
+	for (it = playerCont->begin(); it != playerCont->end(); ++it) {
+		if (it->getTurn()) {
+			it->setTurn();
+			if (it->getCpu())
+				--it;
+			else
+				++it;
+			it->setTurn();
+		}
+	}
+}
+
+void Gameplay::playTurn()
+{
+	std::deque <Player> ::iterator it;
+	for (it = playerCont->begin(); it != playerCont->end(); ++it) {
+		if (it->getTurn()) {
+			it->showHand();
+			std::cout << "\nWhat card do you want to play? (enter value of index of the card): ";
+			std::cin >> index;
+			test = it->showColor(index);
+			test2 = testDeck->showCol();
+			num1 = it->showNum(index);
+			num2 = testDeck->showNum();
+			setValid(num1, num2, test, test2);
+			if (getValid()) {
+				dealHand->push_back(it->playCard(index)); // push the desired card into dealers hand
+				it->disHand(index); // discard card from hand
+				testDeck->disAdd(dealHand->back()); // push card to discard pile
+				dealHand->pop_back(); // discard card from dealer hand
+				testDeck->showDeck(); // show top of discard
+			}
+		}
+	}
+}
+
+void Gameplay::drawTurn()
+{
+	std::deque <Player> ::iterator it;
+	for (it = playerCont->begin(); it != playerCont->end(); ++it) {
+		if (it->getTurn()) {
+			deal(1);
+			std::cout << "\nYou drew" << std::endl;
+			it->showDraw(); //come back to this and fix to just show the draw card not whole hand
+			std::cout << "\nWould you like to keep this card or play it? (1 or 2): ";
+			std::cin >> choice;
+			if (choice == 2) {
+				test = it->showColor();
+				test2 = testDeck->showCol();
+				num1 = it->showNum();
+				num2 = testDeck->showNum();
+				setValid(num1, num2, test, test2);
+				if (getValid()) {
+					it->showHand();
+					dealHand->push_back(it->playCard()); //push last card aka card you drew into dealer hand
+					it->disHand(); //discard the card from hand
+					testDeck->disAdd(dealHand->back()); //push card to discard pile
+					dealHand->pop_back(); //discard from dealer hand
+					testDeck->showDeck(); //show new discard card //comeback to this just show top of discard
+				}
+			}
+		}
+	}
+}
+
+void Gameplay::setValid(int a, int b, std::string c, std::string d)
+{
+	if (a == b || c == d) {
+		isValid = 1;
+	}
+	else
+	{
+		std::cout << "\nThe card you choose is invalid, pick another card or draw" << std::endl;
+	}
+}
+
+bool Gameplay::getValid()
+{
+	return isValid;
 }

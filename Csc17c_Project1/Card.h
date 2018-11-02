@@ -16,5 +16,6 @@ public:
 	enum RANK { RED, GREEN, BLUE, YELLOW, WILD = 8 };
 	RANK rColor;
 	void setColor(RANK);
+	int getNum();
 	std::string getColor();
 };

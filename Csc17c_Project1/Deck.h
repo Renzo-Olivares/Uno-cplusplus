@@ -29,4 +29,6 @@ public:
 	void startDiscard();
 	void disAdd(Card);
 	Card drawDeck();
+	std::string showCol();
+	int showNum();
 };

@@ -9,7 +9,13 @@ private:
 	Deck* testDeck = new Deck;
 	int score;
 	int nPlayers;
-	int turn;
+	std::string test = "";
+	std::string test2 = "";
+	int num1 = 0;
+	int num2 = 0;
+	int index = 0;
+	int choice = 0;
+	bool isValid = 0;
 public:
 	Gameplay()
 	{
@@ -30,8 +36,11 @@ public:
 	void setScore();
 	void setPlayers();
 	void setTurn();
+	void playTurn();
+	void drawTurn();
+	void setValid(int, int, std::string, std::string);
+	bool getValid();
 	int getScore();
 	int getPlayers();
-	int getTurn();
 };
 

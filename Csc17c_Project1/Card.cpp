@@ -31,3 +31,8 @@ std::string Card::getColor()
 {
 	return color;
 }
+
+int Card::getNum()
+{
+	return number;
+}
