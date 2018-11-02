@@ -9,12 +9,17 @@ private:
 	bool isCpu;
 	bool isTurn = 0;
 	std::deque <Card> *hand = new std::deque <Card>;
-	std::stack <Card> *sDraw = new std::stack <Card>; //stack to show draw card 
 public:
 	Player()
-	{ setCpu(); setName(); }
+	{ 
+		setCpu(); 
+		setName(); 
+	}
 	~Player()
-	{ delete hand; hand = nullptr; }
+	{ 
+		delete hand; 
+		hand = nullptr; 
+	}
 	void setName();
 	void setCpu();
 	std::string getName();
@@ -27,8 +32,6 @@ public:
 	void disHand(int);
 	void showHand();
 	void showDraw();
-	void stackLast();
-	Card getTop();
 	Card playCard();
 	Card playCard(int);
 	std::string showColor(int);

@@ -28,7 +28,10 @@ public:
 		initialize();
 	}
 	~Gameplay()
-	{ delete playerCont, dealHand; playerCont, dealHand = nullptr; }
+	{ 
+		delete playerCont, dealHand; 
+		playerCont, dealHand = nullptr; 
+	}
 	void initialize();
 	void deal();
 	void deal(int);

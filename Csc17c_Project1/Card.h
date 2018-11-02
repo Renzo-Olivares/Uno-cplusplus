@@ -9,11 +9,20 @@ private:
 
 public:
 	Card(int n)
-	{ number = n; }
+	{ 
+		number = n; 
+	}
 	~Card()
 	{ };
 	void showCard();
-	enum RANK { RED, GREEN, BLUE, YELLOW, WILD = 8 };
+	enum RANK 
+	{ 
+		RED, 
+		GREEN, 
+		BLUE, 
+		YELLOW, 
+		WILD = 8 
+	};
 	RANK rColor;
 	void setColor(RANK);
 	int getNum();

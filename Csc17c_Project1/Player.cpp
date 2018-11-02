@@ -122,20 +122,3 @@ bool Player::getEmpty()
 	return hand->empty();
 }
 
-void Player::stackLast()
-{
-	for (int i = 0; i <= 1; i++) {
-		sDraw->push(hand->back());
-	}
-
-	/*
-	for (int i = 0; i < DECK_SIZE; i++) {
-		dDeck->push_back(aDeck->top());
-		aDeck->pop();
-	}*/ //writes stack back to list
-}
-
-Card Player::getTop()
-{
-	return sDraw->top();
-}

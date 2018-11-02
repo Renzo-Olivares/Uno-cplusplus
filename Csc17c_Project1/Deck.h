@@ -18,9 +18,16 @@ private:
 
 public:
 	Deck()
-	{ populateDeck(); shuffleDeck(); stackDeck(); }
+	{ 
+		populateDeck(); 
+		shuffleDeck(); 
+		stackDeck(); 
+	}
 	~Deck()
-	{ delete dDeck, sDeck, aDeck; dDeck, sDeck, aDeck = nullptr; }
+	{ 
+		delete dDeck, sDeck, aDeck; 
+		dDeck, sDeck, aDeck = nullptr; 
+	}
 	void populateDeck();
 	void showDeck();
 	void shuffleDeck();
