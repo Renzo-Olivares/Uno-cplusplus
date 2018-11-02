@@ -74,3 +74,8 @@ void Deck::discard()
 {
 	aDeck->pop();
 }
+
+void Deck::disAdd(Card n)
+{
+	dDeck->push_back(n);
+}

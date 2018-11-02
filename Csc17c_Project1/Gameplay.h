@@ -4,7 +4,7 @@
 class Gameplay
 {
 private:
-	std::list <Player> *playerCont = new std::list <Player>;
+	std::deque <Player> *playerCont = new std::deque <Player>;
 	std::list <Card> *dealHand = new std::list <Card>;
 	Deck* testDeck = new Deck;
 	int score;
@@ -14,13 +14,19 @@ public:
 	Gameplay()
 	{
 		setPlayers();
-		initialize();
+		for (int i = 0; i < nPlayers; i++) {
+			Player* ptr = nullptr;
+			ptr = new Player;
+			playerCont->push_back(*ptr);
+		} //Create player objects
 		deal();
+		initialize();
 	}
 	~Gameplay()
 	{ delete playerCont, dealHand; playerCont, dealHand = nullptr; }
 	void initialize();
 	void deal();
+	void deal(int);
 	void setScore();
 	void setPlayers();
 	void setTurn();

@@ -27,5 +27,6 @@ public:
 	void stackDeck();
 	void discard();
 	void startDiscard();
+	void disAdd(Card);
 	Card drawDeck();
 };

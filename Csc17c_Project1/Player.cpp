@@ -5,7 +5,7 @@ void Player::setName()
 {
 	if (isCpu) {
 		name = "John";
-		std::cout << "This CPU name is " << getName() << std::endl;
+		std::cout << "The CPU name is " << getName() << std::endl;
 	}
 	else {
 		std::cout << "Please enter your desired name: ";
@@ -42,12 +42,57 @@ void Player::setCard(Card n)
 
 void Player::showHand()
 {
+	std::cout << "\nPlayer: " << name << " Hand" << std::endl;
 	if (isCpu)
-		std::cout << "hand is hidden" << std::endl;
+		std::cout << "Hand is hidden" << std::endl;
 	else {
 		std::deque <Card> ::iterator it;
 		for (it = hand->begin(); it != hand->end(); ++it) {
-			it->showCard();
+			//it->showCard();
 		}
 	}
+}
+
+void Player::showDraw()
+{
+	std::deque <Card> ::iterator it;
+	for (it = hand->end(); it <= hand->end(); ++it) {
+			it->showCard();
+	}//remember to fix
+	//pass hand to a stack
+	//push top card to new dequeu
+	//iterate over that deque showing only draw card
+}
+
+void Player::disHand()
+{
+	hand->pop_back();
+}
+
+void Player::disHand(int n)
+{
+	hand->pop_back();
+}
+
+void Player::setTurn()
+{
+	if (isTurn)
+		isTurn = 0;
+	else
+		isTurn = 1;
+}
+
+bool Player::getTurn()
+{
+	return isTurn;
+}
+
+Card Player::playCard()
+{
+	return hand->back();
+}
+
+Card Player::playCard(int n)
+{
+	return hand->at(n);
 }
