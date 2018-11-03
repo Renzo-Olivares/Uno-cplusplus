@@ -15,7 +15,7 @@ void Gameplay::initialize()
 	//Turn logic rip
 	for (;;) {
 		for (it = playerCont->begin(); it != playerCont->end(); ++it) {
-			std::cout << "\nCurrent discard card" << std::endl;
+			std::cout << "\nCurrent discard card (last card)" << std::endl;
 			testDeck->showDeck(); //show discard pile //come back to this only show top of pile
 			std::cout << std::endl;
 			if (it->getTurn()) {
@@ -58,12 +58,15 @@ void Gameplay::initialize()
 				}
 
 			}
-			//if any hand is empty
-			//break out of this iteration loop 
 			if (it->getEmpty())
 			{
+				brake = 1;
+				std::cout << "\nThe winner is: " << it->getName() << std::endl;
 				break;
 			}
+		}
+		if (brake == 1) {
+			break;
 		}
 	}
 }
@@ -136,24 +139,31 @@ void Gameplay::playTurn()
 	for (it = playerCont->begin(); it != playerCont->end(); ++it) {
 		if (it->getTurn()) {
 			it->showHand();
-			std::cout << "\nWhat card do you want to play? (enter value of index of the card): ";
+			std::cout << "\nWhat card do you want to play? (enter value of index of the card starting with 0): ";
 			if (!(it->getCpu())) {
 				std::cin >> index;
 			}
 			else {
-				index = ((rand() % it->handSize()) + 0); // (rand() % (# of integers in your range)) + (lowest number in range)
+				// (rand() % (# of integers in your range)) + (lowest number in range)
+				index = ((rand() % it->handSize()) + 0); 
 			}
+			//set test variables
 			test = it->showColor(index);
 			test2 = testDeck->showCol();
 			num1 = it->showNum(index);
 			num2 = testDeck->showNum();
 			setValid(num1, num2, test, test2);
 			if (getValid()) {
-				dealHand->push_back(it->playCard(index)); // push the desired card into dealers hand
-				it->disHand(index); // discard card from hand
-				testDeck->disAdd(dealHand->back()); // push card to discard pile
-				dealHand->pop_back(); // discard card from dealer hand
-				testDeck->showDeck(); // show top of discard
+				// push the desired card into dealers hand
+				dealHand->push_back(it->playCard(index)); 
+				it->disHand(index); 
+				// discard card from hand
+				testDeck->disAdd(dealHand->back()); 
+				// push card to discard pile
+				dealHand->pop_back(); 
+				// discard card from dealer hand
+				testDeck->showDeck(); 
+				// show top of discard
 			}
 		}
 	}
@@ -166,13 +176,15 @@ void Gameplay::drawTurn()
 		if (it->getTurn()) {
 			deal(1);
 			std::cout << "\nYou drew" << std::endl;
-			it->showDraw(); //come back to this and fix to just show the draw card not whole hand
+			//come back to this and fix to just show the draw card not whole hand
+			it->showDraw(); 
 			std::cout << "\nWould you like to keep this card or play it? (1 or 2): ";
 			if (!(it->getCpu())) {
 				std::cin >> choice;
 			}
 			else {
-				choice = ((rand() % 2) + 1); // (rand() % (# of integers in your range)) + (lowest number in range)
+				choice = ((rand() % 2) + 1); 
+				// (rand() % (# of integers in your range)) + (lowest number in range)
 				std::cout << std::endl;
 			}
 			if (choice == 2) {
@@ -182,12 +194,17 @@ void Gameplay::drawTurn()
 				num2 = testDeck->showNum();
 				setValid(num1, num2, test, test2);
 				if (getValid()) {
-					//it->showHand();
-					dealHand->push_back(it->playCard()); //push last card aka card you drew into dealer hand
-					it->disHand(); //discard the card from hand
-					testDeck->disAdd(dealHand->back()); //push card to discard pile
-					dealHand->pop_back(); //discard from dealer hand
-					testDeck->showDeck(); //show new discard card //comeback to this just show top of discard
+					dealHand->push_back(it->playCard()); 
+					//push last card aka card you drew into dealer hand
+					it->disHand(); 
+					//discard the card from hand
+					testDeck->disAdd(dealHand->back()); 
+					//push card to discard pile
+					dealHand->pop_back(); 
+					//discard from dealer hand
+					testDeck->showDeck();
+					//show new discard card 
+					//comeback to this just show top of discard
 				}
 			}
 		}

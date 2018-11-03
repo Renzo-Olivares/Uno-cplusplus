@@ -23,7 +23,7 @@ void Deck::populateDeck()
 	//Generate Wild
 	for (int i = 0; i < Card::WILD; i++) {
 		Card* cardPtr = nullptr;
-		cardPtr = new Card(69);
+		cardPtr = new Card(100);
 		cardPtr->setColor(Card::WILD);
 		dDeck->push_back(*cardPtr);
 	}
@@ -51,12 +51,6 @@ void Deck::stackDeck()
 		aDeck->push(dDeck->front());
 		dDeck->pop_front();
 	}
-	
-	/*
-	for (int i = 0; i < DECK_SIZE; i++) {
-		dDeck->push_back(aDeck->top());
-		aDeck->pop();
-	}*/ //writes stack back to list
 }
 
 void Deck::startDiscard()

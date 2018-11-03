@@ -15,6 +15,7 @@ private:
 	int num2 = 0;
 	int index = 0;
 	int choice = 0;
+	int brake = 0;
 	bool isValid = 0;
 public:
 	Gameplay()
