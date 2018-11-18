@@ -1,6 +1,9 @@
-#pragma once
+#ifndef PLAYER_H
+#define PLAYER_H
+
 #include <string>
 #include <deque>
+#include "Card.h"
 
 class Player
 {
@@ -40,3 +43,5 @@ public:
 	int showNum();
 	int handSize();
 };
+
+#endif

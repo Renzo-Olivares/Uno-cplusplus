@@ -1,6 +1,9 @@
-#pragma once
+#ifndef GAMEPLAY_H
+#define GAMEPLAY_H
+
 #include "Player.h"
 #include <ctime>
+#include "Deck.h"
 
 class Gameplay
 {
@@ -46,4 +49,6 @@ public:
 	bool getValid();
 	int getPlayers();
 };
+
+#endif
 

@@ -1,4 +1,6 @@
-#pragma once
+#ifndef CARD_H
+#define CARD_H
+
 #include <iostream>
 
 class Card
@@ -28,3 +30,5 @@ public:
 	int getNum();
 	std::string getColor();
 };
+
+#endif

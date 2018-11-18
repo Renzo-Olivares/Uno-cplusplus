@@ -1,4 +1,6 @@
-#pragma once
+#ifndef DECK_H
+#define DECK_H
+
 #include <list>
 #include <iterator>
 #include <algorithm>
@@ -39,3 +41,5 @@ public:
 	std::string showCol();
 	int showNum();
 };
+
+#endif
